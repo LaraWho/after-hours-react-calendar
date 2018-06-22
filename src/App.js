@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
@@ -20,15 +19,47 @@ class App extends Component {
       Nov: 30,
       Dec: 31
     }
-  }
+
+    let days = []
+
+    for(let month in monthDays) {
+      for(let i = 1; i <= monthDays[month]; i++) {
+          let day = {
+            month: month,
+            day: i
+          }
+          days.push(day)
+      }
+    
+
   
-  render() {
-    return (
-      <div>
-        
-      </div>
-    );
+  this.state = {
+    days: days
   }
 }
+
+  render() {
+    let styles = {
+      height: 150,
+      width: 150,
+      border: '2px solid black'
+    }
+
+    let displayDays = this.state.days.map( (day, i) => {
+    return(
+    <div style={styles} key={ day.month + day.day}> { `${day.month} - ${day.day}` } </div> 
+    )
+  })
+  
+
+    return(
+      <div className="cal">
+        {displayDays}
+      </div>
+    );
+    
+  }
+}
+
 
 export default App;
